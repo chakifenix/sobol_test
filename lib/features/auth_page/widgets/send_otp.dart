@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
+import 'package:sobol_test/controllers/auth.dart';
 import 'package:sobol_test/features/home_page/view/home_screen.dart';
 
 class SendOtp extends StatelessWidget {
-  SendOtp({super.key});
-  final TextEditingController controller = TextEditingController();
+  SendOtp({super.key, required this.phoneText});
+  final TextEditingController phoneText;
+  final TextEditingController otpController = TextEditingController();
+
   final focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -32,19 +36,28 @@ class SendOtp extends StatelessWidget {
         SizedBox(
             width: 268.w,
             child: Text(
-                'Введите код, который мы отправили в SMS на +7(966) 666 66 66')),
+                'Введите код, который мы отправили в SMS на ${phoneText.text}')),
         SizedBox(
           height: 20.h,
         ),
         Pinput(
-          length: 5,
+          length: 6,
           pinAnimationType: PinAnimationType.slide,
-          controller: controller,
+          controller: otpController,
           focusNode: focusNode,
           defaultPinTheme: defaultPinTheme,
           onCompleted: (value) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            AuthService.loginWithOtp(otp: otpController.text).then((value) {
+              if (value == "Success") {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(value),
+                  backgroundColor: Colors.red,
+                ));
+              }
+            });
           },
         ),
         SizedBox(

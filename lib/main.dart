@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sobol_test/controllers/auth.dart';
 import 'package:sobol_test/features/auth_page/view/auth_screen.dart';
+import 'package:sobol_test/features/home_page/view/home_screen.dart';
 import 'package:sobol_test/firebase_options.dart';
 
 void main() async {
@@ -43,5 +45,33 @@ class MainPage extends StatelessWidget {
             }),
       ),
     );
+  }
+}
+
+class CheckUserLoggedInOrNot extends StatefulWidget {
+  const CheckUserLoggedInOrNot({super.key});
+
+  @override
+  State<CheckUserLoggedInOrNot> createState() => _CheckUserLoggedInOrNotState();
+}
+
+class _CheckUserLoggedInOrNotState extends State<CheckUserLoggedInOrNot> {
+  @override
+  void initState() {
+    AuthService.isLoggedIn().then((value) {
+      if (value) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      } else {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

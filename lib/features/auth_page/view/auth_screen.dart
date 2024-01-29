@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:pinput/pinput.dart';
+import 'package:sobol_test/controllers/auth.dart';
 import 'package:sobol_test/features/auth_page/widgets/login_screen.dart';
 import 'package:sobol_test/features/auth_page/widgets/send_otp.dart';
 
@@ -20,20 +20,42 @@ class _LoginScreenState extends State<LoginScreen> {
   bool secondPage = false;
   bool thirdPage = false;
 
+  final _formKey = GlobalKey<FormState>();
+
+  TextEditingController phoneNumber = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     List page = [
       Registration(
+        formkey: _formKey,
+        phoneText: phoneNumber,
         onIndexChanged: () {
-          setState(() {
-            currentIndex = 1;
-            firstPage = false;
-            firstPagePassed = true;
-            secondPage = true;
-          });
+          if (_formKey.currentState!.validate()) {
+            String cleanedNumber =
+                phoneNumber.text.replaceAll(RegExp(r'[\s()-]'), '');
+            AuthService.sentOtp(
+                phone: cleanedNumber,
+                errorStep: () =>
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                        "Error in sending OTP",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    )),
+                nextStep: () {
+                  setState(() {
+                    currentIndex = 1;
+                    firstPage = false;
+                    firstPagePassed = true;
+                    secondPage = true;
+                  });
+                });
+          }
         },
       ),
-      SendOtp()
+      SendOtp(phoneText: phoneNumber)
     ];
     return Scaffold(
       resizeToAvoidBottomInset: false,

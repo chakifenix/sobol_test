@@ -5,7 +5,13 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class Registration extends StatefulWidget {
   final void Function()? onIndexChanged;
-  Registration({super.key, this.onIndexChanged});
+  final GlobalKey<FormState> formkey;
+  final TextEditingController phoneText;
+  Registration(
+      {super.key,
+      this.onIndexChanged,
+      required this.formkey,
+      required this.phoneText});
 
   @override
   State<Registration> createState() => _RegistrationState();
@@ -15,8 +21,6 @@ class _RegistrationState extends State<Registration> {
   final maskFormatter = new MaskTextInputFormatter(
     mask: '+# (###) ###-##-##',
   );
-
-  TextEditingController phoneNumber = TextEditingController();
 
   bool phoneNumberFilled = false;
 
@@ -68,26 +72,34 @@ class _RegistrationState extends State<Registration> {
               SizedBox(
                 height: 2.w,
               ),
-              TextFormField(
-                onChanged: (value) {
-                  if (value.length == 18) {
-                    setState(() {
-                      phoneNumberFilled = true;
-                    });
-                  } else {
-                    setState(() {
-                      phoneNumberFilled = false;
-                    });
-                  }
-                },
-                controller: phoneNumber,
-                inputFormatters: [maskFormatter],
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    focusedBorder: OutlineInputBorder(
+              Form(
+                key: widget.formkey,
+                child: TextFormField(
+                  onChanged: (value) {
+                    if (value.length == 18) {
+                      setState(() {
+                        phoneNumberFilled = true;
+                      });
+                    } else {
+                      setState(() {
+                        phoneNumberFilled = false;
+                      });
+                    }
+                  },
+                  controller: widget.phoneText,
+                  inputFormatters: [maskFormatter],
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.r),
-                        borderSide: BorderSide(color: Color(0xFFFFB700)))),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                          borderSide: BorderSide(color: Color(0xFFFFB700)))),
+                  validator: (value) {
+                    if (value!.length != 18) return "Invalid phone number";
+                    return null;
+                  },
+                ),
               ),
             ],
           ),
