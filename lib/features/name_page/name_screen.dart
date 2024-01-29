@@ -28,7 +28,7 @@ class Name extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(
-                color: Color(0xFFC6C6C8),
+                color: const Color(0xFFC6C6C8),
                 fontSize: 16.sp,
                 fontFamily: 'SF Pro Text',
                 fontWeight: FontWeight.w400,

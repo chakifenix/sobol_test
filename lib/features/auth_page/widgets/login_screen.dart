@@ -7,7 +7,7 @@ class Registration extends StatefulWidget {
   final void Function()? onIndexChanged;
   final GlobalKey<FormState> formkey;
   final TextEditingController phoneText;
-  Registration(
+  const Registration(
       {super.key,
       this.onIndexChanged,
       required this.formkey,
@@ -18,7 +18,7 @@ class Registration extends StatefulWidget {
 }
 
 class _RegistrationState extends State<Registration> {
-  final maskFormatter = new MaskTextInputFormatter(
+  final maskFormatter = MaskTextInputFormatter(
     mask: '+# (###) ###-##-##',
   );
 
@@ -30,7 +30,7 @@ class _RegistrationState extends State<Registration> {
       padding: EdgeInsets.only(left: 20.w, right: 20.w),
       child: Column(
         children: [
-          Text(
+          const Text(
             'Регистрация',
             style: TextStyle(
               color: Color(0xFF4E4E4E),
@@ -42,13 +42,13 @@ class _RegistrationState extends State<Registration> {
           SizedBox(
             height: 24.h,
           ),
-          Container(
+          SizedBox(
               width: 199.w,
               child: Text(
                 'Введите номер телефона для регистрации',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0xFF4E4E4E),
+                  color: const Color(0xFF4E4E4E),
                   fontSize: 15.sp,
                   fontFamily: 'SF Pro Text',
                   fontWeight: FontWeight.w400,
@@ -63,7 +63,7 @@ class _RegistrationState extends State<Registration> {
               Text(
                 'Номер телефона',
                 style: TextStyle(
-                  color: Color(0xFF4E4E4E),
+                  color: const Color(0xFF4E4E4E),
                   fontSize: 12.sp,
                   fontFamily: 'SF Pro Display',
                   fontWeight: FontWeight.w500,
@@ -94,7 +94,8 @@ class _RegistrationState extends State<Registration> {
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.r),
-                          borderSide: BorderSide(color: Color(0xFFFFB700)))),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFFFB700)))),
                   validator: (value) {
                     if (value!.length != 18) return "Invalid phone number";
                     return null;
@@ -107,13 +108,15 @@ class _RegistrationState extends State<Registration> {
             height: 120.h,
           ),
           CupertinoButton(
-              color: phoneNumberFilled ? Color(0xFFFFB700) : Color(0xFFA7A7A7),
-              child: Text(
+              color: phoneNumberFilled
+                  ? const Color(0xFFFFB700)
+                  : const Color(0xFFA7A7A7),
+              onPressed: widget.onIndexChanged,
+              child: const Text(
                 'Отправить смс-код',
                 style: TextStyle(color: Color(0xFF4E4E4E)),
-              ),
-              onPressed: widget.onIndexChanged),
-          Container(
+              )),
+          SizedBox(
             width: 232.w,
             child: Text.rich(
               TextSpan(
@@ -122,7 +125,7 @@ class _RegistrationState extends State<Registration> {
                     text:
                         'Нажимая на данную кнопку, вы даете согласие на обработку ',
                     style: TextStyle(
-                      color: Color(0xFFA7A7A7),
+                      color: const Color(0xFFA7A7A7),
                       fontSize: 10.sp,
                       fontFamily: 'SF Pro Text',
                       fontWeight: FontWeight.w400,
@@ -131,7 +134,7 @@ class _RegistrationState extends State<Registration> {
                   TextSpan(
                     text: 'персональных данных',
                     style: TextStyle(
-                      color: Color(0xFFFFB700),
+                      color: const Color(0xFFFFB700),
                       fontSize: 10.sp,
                       fontFamily: 'SF Pro Text',
                       fontWeight: FontWeight.w400,

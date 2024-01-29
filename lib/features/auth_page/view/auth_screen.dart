@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
             AuthService.sentOtp(
                 phone: cleanedNumber,
                 errorStep: () =>
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text(
                         "Error in sending OTP",
                         style: TextStyle(color: Colors.white),
@@ -60,9 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-          backgroundColor: Color(0xFFFBFBFB),
+          backgroundColor: const Color(0xFFFBFBFB),
           elevation: 0,
-          leading: BackButton(
+          leading: const BackButton(
             color: Colors.black,
           )),
       body: Column(
@@ -83,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ? Colors.green
                                 : Colors.transparent),
                     color: (firstPage)
-                        ? Color(0xFFFFB700)
+                        ? const Color(0xFFFFB700)
                         : (secondPage)
                             ? Colors.transparent
                             : (thirdPage)
@@ -92,11 +91,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     shape: BoxShape.circle),
                 child: Center(
                     child: (firstPage)
-                        ? Text('1')
+                        ? const Text('1')
                         : (secondPage)
-                            ? Text('')
+                            ? const Text('')
                             : (thirdPage)
-                                ? Text('')
+                                ? const Text('')
                                 : null),
               ),
               Column(
@@ -104,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: 44,
                     height: 1,
-                    decoration: BoxDecoration(color: Color(0xFFEBEBEB)),
+                    decoration: const BoxDecoration(color: Color(0xFFEBEBEB)),
                   ),
                   (firstPagePassed)
                       ? SvgPicture.asset('images/icon.svg')
@@ -117,16 +116,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 36.w,
                 height: 36.h,
                 decoration: BoxDecoration(
-                    color: (secondPage) ? Color(0xFFFFB700) : Color(0xFFEBEBEB),
+                    color: (secondPage)
+                        ? const Color(0xFFFFB700)
+                        : const Color(0xFFEBEBEB),
                     shape: BoxShape.circle),
-                child: Center(child: Text('2')),
+                child: const Center(child: Text('2')),
               ),
               Column(
                 children: [
                   Container(
                     width: 44,
                     height: 1,
-                    decoration: BoxDecoration(color: Color(0xFFEBEBEB)),
+                    decoration: const BoxDecoration(color: Color(0xFFEBEBEB)),
                   ),
                   SizedBox(
                     height: 20.h,
@@ -137,9 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 36.w,
                 height: 36.h,
                 decoration: BoxDecoration(
-                    color: (thirdPage) ? Color(0xFFFFB700) : Color(0xFFEBEBEB),
+                    color: (thirdPage)
+                        ? const Color(0xFFFFB700)
+                        : const Color(0xFFEBEBEB),
                     shape: BoxShape.circle),
-                child: Center(child: Text('3')),
+                child: const Center(child: Text('3')),
               ),
             ],
           ),

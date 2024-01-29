@@ -14,10 +14,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    List pages = [MyProject(), Accaunt()];
+    List pages = [const MyProject(), const Accaunt()];
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
-          backgroundColor: Color(0xFFE3E3E3),
+          backgroundColor: const Color(0xFFE3E3E3),
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.star_fill),
@@ -51,7 +51,7 @@ class MyProject extends StatelessWidget {
 }
 
 class Accaunt extends StatefulWidget {
-  Accaunt({super.key});
+  const Accaunt({super.key});
 
   @override
   State<Accaunt> createState() => _AccauntState();
@@ -76,7 +76,7 @@ class _AccauntState extends State<Accaunt> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
+        navigationBar: const CupertinoNavigationBar(
           middle: Text('Аккаунт'),
         ),
         child: Scaffold(
@@ -110,7 +110,7 @@ class _AccauntState extends State<Accaunt> {
                             )
                           ],
                           cancelButton: CupertinoActionSheetAction(
-                            child: Text('Закрыть'),
+                            child: const Text('Закрыть'),
                             onPressed: () {
                               Navigator.pop(context);
                             },
@@ -123,7 +123,7 @@ class _AccauntState extends State<Accaunt> {
                         Container(
                           width: 73,
                           height: 76,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.blue, shape: BoxShape.circle),
                           child: (_image == null)
                               ? SvgPicture.asset('images/head.svg')
@@ -142,7 +142,7 @@ class _AccauntState extends State<Accaunt> {
                   Text(
                     'apollo@gmail.com',
                     style: TextStyle(
-                      color: Color(0xFF7D7D7D),
+                      color: const Color(0xFF7D7D7D),
                       fontSize: 12.sp,
                       fontFamily: 'SF Pro Text',
                       fontWeight: FontWeight.w500,
@@ -173,7 +173,7 @@ class _AccauntState extends State<Accaunt> {
                           });
                         },
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                                   bottom:
                                       BorderSide(color: Color(0xFFC6C6C8)))),
@@ -182,19 +182,19 @@ class _AccauntState extends State<Accaunt> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Имя'),
+                              const Text('Имя'),
                               Row(
                                 children: [
                                   Text(
                                     name,
                                     style: TextStyle(
-                                      color: Color(0xFFC6C6C8),
+                                      color: const Color(0xFFC6C6C8),
                                       fontSize: 16.sp,
                                       fontFamily: 'SF Pro Text',
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.chevron_right,
                                     color: Color(0xFFC6C6C8),
                                   )
@@ -219,7 +219,7 @@ class _AccauntState extends State<Accaunt> {
                           });
                         },
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               border: Border(
                                   bottom:
                                       BorderSide(color: Color(0xFFC6C6C8)))),
@@ -228,19 +228,19 @@ class _AccauntState extends State<Accaunt> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text('Фамилия'),
+                              const Text('Фамилия'),
                               Row(
                                 children: [
                                   Text(
                                     surname,
                                     style: TextStyle(
-                                      color: Color(0xFFC6C6C8),
+                                      color: const Color(0xFFC6C6C8),
                                       fontSize: 16.sp,
                                       fontFamily: 'SF Pro Text',
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.chevron_right,
                                     color: Color(0xFFC6C6C8),
                                   )

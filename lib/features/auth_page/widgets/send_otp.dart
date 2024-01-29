@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pinput/pinput.dart';
@@ -14,14 +13,14 @@ class SendOtp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
+    const defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
       textStyle: TextStyle(
         fontSize: 22,
-        color: const Color.fromRGBO(30, 60, 87, 1),
+        color: Color.fromRGBO(30, 60, 87, 1),
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           border: Border(
         bottom: BorderSide(width: 3, color: Color(0xFFA7A7A7)),
       )),
@@ -29,7 +28,7 @@ class SendOtp extends StatelessWidget {
 
     return Column(
       children: [
-        Text('Подтверждение'),
+        const Text('Подтверждение'),
         SizedBox(
           height: 24.h,
         ),
@@ -49,8 +48,10 @@ class SendOtp extends StatelessWidget {
           onCompleted: (value) {
             AuthService.loginWithOtp(otp: otpController.text).then((value) {
               if (value == "Success") {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   content: Text(value),
@@ -63,13 +64,30 @@ class SendOtp extends StatelessWidget {
         SizedBox(
           height: 48.h,
         ),
-        Text(
-          'Отправить код еще раз',
-          style: TextStyle(
-            color: Color(0xFFFFB700),
-            fontSize: 15,
-            fontFamily: 'SF Pro Text',
-            fontWeight: FontWeight.w400,
+        GestureDetector(
+          onTap: () {
+            String cleanedNumber =
+                phoneText.text.replaceAll(RegExp(r'[\s()-]'), '');
+            AuthService.sentOtp(
+                phone: cleanedNumber,
+                errorStep: () =>
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text(
+                        "Error in sending OTP",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    )),
+                nextStep: () {});
+          },
+          child: const Text(
+            'Отправить код еще раз',
+            style: TextStyle(
+              color: Color(0xFFFFB700),
+              fontSize: 15,
+              fontFamily: 'SF Pro Text',
+              fontWeight: FontWeight.w400,
+            ),
           ),
         )
       ],

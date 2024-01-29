@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(home: MainPage());
+        return const MaterialApp(home: MainPage());
       },
     );
   }
@@ -38,10 +38,10 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: CupertinoButton.filled(
-            child: Text('Вход'),
+            child: const Text('Вход'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()));
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
             }),
       ),
     );
@@ -60,11 +60,11 @@ class _CheckUserLoggedInOrNotState extends State<CheckUserLoggedInOrNot> {
   void initState() {
     AuthService.isLoggedIn().then((value) {
       if (value) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()));
       } else {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
       }
     });
     super.initState();
